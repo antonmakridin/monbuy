@@ -1,0 +1,249 @@
+:root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #4f46e5;
+    --accent-2: #06b6d4;
+    --success: #16a34a;
+    --danger: #ef4444;
+    --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    --radius: 12px;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: light;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg), #eef2ff 70%);
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #0f172a;
+}
+
+/* Layout */
+.container {
+    max-width: 1100px;
+    margin: 0 auto
+}
+
+header.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: linear-gradient(90deg, #fff, #fbfdff);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: white;
+    font-weight: 700
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 1.05rem
+}
+
+nav.menu {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+nav.menu a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 600
+}
+
+nav.menu a:hover {
+    background: #eef2ff;
+    color: var(--accent)
+}
+
+/* Main grid */
+.main {
+    display: block;
+    margin-top: 22px
+}
+
+/* Left column */
+.panel {
+    background: var(--card);
+    padding: 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow)
+}
+
+.panel h2 {
+    margin: 0 0 12px 0;
+    font-size: 1rem
+}
+
+/* Form */
+form.add-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+.field {
+    display: flex;
+    flex-direction: column
+}
+
+label {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    color: var(--muted)
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    border: 1px solid #e6e9ef;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: transparent;
+    outline: none
+}
+
+
+textarea {
+    grid-column: 1/-1;
+    min-height: 84px;
+    resize: vertical
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    grid-column: 1/-1
+}
+
+button {
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+button.secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(79, 70, 229, 0.12)
+}
+
+.purchases-list {
+    margin-top: 8px;
+    display: grid;
+    gap: 12px
+}
+
+.purchase {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #eef2ff;
+    align-items: center
+}
+
+.purchase .left {
+    display: flex;
+    gap: 12px;
+    align-items: center
+}
+
+
+
+.amount {
+    font-weight: 700
+}
+
+.purchase a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700
+}
+
+footer.site-footer {
+    margin-top: 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem
+}
+
+.card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 10px;
+}
+
+
+.meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 12px
+}
+
+.detail-row {
+    display: flex;
+    gap:10px;
+    font-size: large;
+}
+
+.detail-row:last-child {
+    border-bottom: none
+}
+
+/* Responsive */
+@media (max-width:900px) {
+    .main {
+        grid-template-columns: 1fr
+    }
+
+    form.add-form {
+        grid-template-columns: 1fr
+    }
+
+    .search {
+        display: none
+    }
+}

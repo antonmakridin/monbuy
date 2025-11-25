@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>{% block title %} Мониторинг покупок {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="site-header" role="banner">
+            <div class="brand">
+                <div class="logo">MP</div>
+                <div>
+                    <h1>Мониторинг покупок</h1>
+                    <div style="font-size:0.85rem;color:var(--muted)">Учет расходов и быстрый доступ к деталям</div>
+                </div>
+            </div>
+            <nav class="menu" role="navigation" aria-label="Главное меню">
+                <a href="/">Главная</a>
+                <a href="/detail/">Детали</a>
+                <a href="#">Отчеты</a>
+                <a href="#">Настройки</a>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="site-footer">
+            2025 — Мониторинг покупок
+        </footer>
+    </div>
+</body>
+
+</html>

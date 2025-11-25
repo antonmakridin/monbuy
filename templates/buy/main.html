@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+        <main class="main" role="main" >
+            <section class="panel" aria-labelledby="addPurchase">
+                <h2 id="addPurchase">Добавить покупку</h2>
+                <form class="add-form" action="#" method="post">
+
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="field" {% if field.name == 'description' %}style="grid-column:1/-1"{% endif %}>
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                    <div class="form-actions">
+                        <button type="button" class="secondary">Сбросить</button>
+                        <button type="submit">Добавить</button>
+                    </div>
+            </form>
+            </section>
+
+        <section class="panel" aria-labelledby="recent" style="margin-top:32px;">
+                <h2 id="recent">Покупки</h2>
+                <div class="purchases-list">
+                    {% if purchases %}
+                    {% for purchase in purchases %}
+                    <article class="purchase">
+                        <div class="left">
+                            <div>
+                                <div style="font-weight:700">{{ purchase.title }}</div>
+                                <div class="meta">{{ purchase.buy_date }}</div>
+                            </div>
+                        </div>
+                        <div style="text-align:right">
+                            <div class="amount">₽ {{ purchase.cost }}</div>
+                            <div style="margin-top:8px"><a href="/detail/{{ purchase.id }}">Детали →</a></div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                    {% else %}
+                        <p>Покупок пока нет</p> 
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+{% endblock %}
