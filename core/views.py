@@ -26,7 +26,6 @@ def main(request):
     else:
         form = AddPurch()
 
-    # purchases = Purchases.objects.all().filter(is_active=False)
     purchases = Purchases.objects.all()
     context = {
         'purchases': purchases,
@@ -34,40 +33,36 @@ def main(request):
     }
     return render(request, 'buy/main.html', context)
 
-# def word(request):
-#     if request.method == 'POST':
-#         form = AddNote(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             note = Note.objects.create(**data)
-#             return redirect('/word/')
-#     else:
-#         form = AddNote()
-#     notes = Note.objects.all()
-#     words = Words.objects.all().filter(is_active=True)
-#     context = {
-#         'words': words,
-#         'form': form,
-#         'notes': notes,
-#     }
-#     return render(request, 'word/word_success.html', context)
+def detail_buy(request, purchase_id):
+    purchases = Purchases.objects.get(id=purchase_id)
+    context = {
+        'purchases': purchases,
+    }
+    return render(request, 'buy/detail.html', context)
 
-# def show_word(request, word_id):
-#     words = Words.objects.get(id=word_id)
-#     context = {
-#         'words': words,
-#     }
-#     return render(request, 'word/word.html', context)
-
-# def delete_word(request, word_id):
-#     words = Words.objects.get(id=word_id)
-#     words.delete()
-#     return redirect('/')
+def detail_delete(request, purchase_id):
+    words = Purchases.objects.get(id=purchase_id)
+    words.delete()
+    return redirect('/')
 
 
-# def learn_word(request, word_id):
-#     word = get_object_or_404(Words, id=word_id)
-#     word.is_active = True
-#     word.save()
-#     messages.success(request, f'Слово "{word.slovo}" отмечено как изученное')
-#     return redirect('/')
+def detail_edit(request, purchase_id):
+    try:
+        purchase = Purchases.objects.get(id=purchase_id)
+        
+        if request.method == 'POST':
+            form = AddPurch(request.POST, instance=purchase)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = AddPurch(instance=purchase)
+        
+        context = {
+            'form': form,
+            'purchase': purchase,
+        }
+        return render(request, 'buy/detail_edit.html', context)
+        
+    except Purchases.DoesNotExist:
+        return redirect('/')

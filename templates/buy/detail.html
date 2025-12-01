@@ -1,168 +1,20 @@
-<!-- detail.html -->
-<!doctype html>
-<html lang="ru">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Детали покупки — Мониторинг покупок</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f6f8fb;
-            --card: #ffffff;
-            --muted: #6b7280;
-            --accent: #4f46e5;
-            --accent-2: #06b6d4;
-            --success: #16a34a;
-            --danger: #ef4444;
-            --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
-            --radius: 12px;
-            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            color-scheme: light;
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        html,
-        body {
-            height: 100%
-        }
-
-        body {
-            margin: 0;
-            background: linear-gradient(180deg, var(--bg), #eef2ff 70%);
-            padding: 24px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            color: #0f172a;
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        header.site-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 22px;
-            background: linear-gradient(90deg, #fff, #fbfdff);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px
-        }
-
-        .logo {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: white;
-            font-weight: 700
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 1.05rem
-        }
-
-        nav.menu {
-            display: flex;
-            gap: 10px;
-            align-items: center
-        }
-
-        nav.menu a {
-            color: var(--muted);
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-weight: 600
-        }
-
-        nav.menu a:hover {
-            background: #eef2ff;
-            color: var(--accent)
-        }
-
-        .card {
-            background: var(--card);
-            padding: 18px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-top: 10px;
-        }
-
-
-        .meta {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 12px
-        }
-
-        .detail-row {
-            display: flex;
-            gap:10px;
-            font-size: large;
-        }
-
-        .detail-row:last-child {
-            border-bottom: none
-        }
-
-        .label {
-            color: var(--muted)
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <header class="site-header" role="banner">
-            <div class="brand">
-                <div class="logo">MP</div>
-                <div>
-                    <h1>Мониторинг покупок</h1>
-                    <div style="font-size:0.85rem;color:var(--muted)">Учет расходов и быстрый доступ к деталям</div>
-                </div>
-            </div>
-            <nav class="menu" role="navigation" aria-label="Главное меню">
-                <a href="index.html">Главная</a>
-                <a href="detail.html">Детали</a>
-                <a href="#">Отчеты</a>
-                <a href="#">Настройки</a>
-            </nav>
-        </header>
-
+{% extends 'base.html' %}
+{% block content %}
         <div class="card">
             <div class="grid">
                 <div>
-                    <h1>Кофейня — латте</h1>
-                    <div class="meta">Категория: Еда • Дата: 21 ноября 2025</div>
+                    <h1>{{ purchases.title }}</h1>
+                    <div class="meta">Категория: Еда • Дата: {{ purchases.buy_date|date:"j E Y" }}</div>
                     
                         <section style="margin-top:18px">
                         <h2 style="margin:0 0 8px 0;font-size:1rem">Покупка</h2>
                         <div class="detail-row">
-                            <div class="label">Латте</div>
-                            <div>₽ 250</div>
+                            <div>₽ {{ purchases.cost }}</div>
                         </div>
                     </section>
                     <section style="margin-top:18px">
                         <h2 style="margin:0 0 8px 0;font-size:1rem">Описание</h2>
-                        <p style="margin:0;color:var(--muted)">Заказал латте и круассан. Удобная парковка, быстро
-                            обслужили. Платил картой.</p>
+                        <p style="margin:0;color:var(--muted)">{{ purchases.description }}</p>
                     </section>
 
 
@@ -172,16 +24,12 @@
                 <aside>
 
                     <div style="margin-top:12px;display:flex;gap:8px">
-                        <a href="#">Редактировать</a>
-                        <a href="#">Удалить</a>
+                        <a href="{% url 'detail_edit' purchases.id %}">Редактировать</a>
+                        <a href="{% url 'detail_delete' purchases.id %}">Удалить</a>
                     </div>
 
                 </aside>
 
             </div>
         </div>
-
-    </div>
-</body>
-
-</html>
+{% endblock %}

@@ -6,9 +6,9 @@ from .views import *
 urlpatterns = [
     path('', main),
     # path('word/', word),
-    # path('words/<int:word_id>',  show_word, name='show_word'),
-    # path('words/<int:word_id>/learn',  learn_word, name='learn_word'),
-    # path('words/<int:word_id>/delete',  delete_word, name='delete_word'),
+    path('detail/<int:purchase_id>',  detail_buy, name='detail_buy'),
+    path('detail/<int:purchase_id>/edit',  detail_edit, name='detail_edit'),
+    path('detail/<int:purchase_id>/delete',  detail_delete, name='detail_delete'),
     # # path('catalog/', catalog),
     # path('products/', pro,ducts),
     # path('feedback/', add_feedback),

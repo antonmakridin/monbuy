@@ -113,6 +113,12 @@ form.add-form {
     gap: 12px
 }
 
+form.edit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
 .field {
     display: flex;
     flex-direction: column
@@ -126,6 +132,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="date"],
 select,
 textarea {
     border: 1px solid #e6e9ef;
@@ -240,6 +247,10 @@ footer.site-footer {
     }
 
     form.add-form {
+        grid-template-columns: 1fr
+    }
+
+    form.edit-form {
         grid-template-columns: 1fr
     }
 

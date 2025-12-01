@@ -1,7 +1,11 @@
 from django import forms
 from .models import *
 
-class AddPurch(forms.Form):
+class AddPurch(forms.ModelForm):
+    class Meta:
+        model = Purchases
+        fields = ['title', 'cost', 'buy_date', 'description']
+    
     title = forms.CharField(
         widget=forms.TextInput(attrs={
             'placeholder': 'Кофе, Подарок, Проезд',
@@ -22,7 +26,7 @@ class AddPurch(forms.Form):
     )
     buy_date = forms.DateField(
         widget=forms.DateInput(attrs={
-            'placeholder': '2025-11-21',
+            'type': 'date',
             'id': 'date'
             }),
         label='Дата',
@@ -34,7 +38,8 @@ class AddPurch(forms.Form):
             'rows': 5,
             'id': 'description'
         }),
-        label='Описание'
+        label='Описание',
+        required=False
     )
     
     
