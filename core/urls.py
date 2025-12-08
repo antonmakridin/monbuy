@@ -4,7 +4,7 @@ from .views import *
 """импортируем все функции из views"""
 
 urlpatterns = [
-    path('', main),
+    path('', main, name='main'),
     # path('word/', word),
     path('detail/<int:purchase_id>',  detail_buy, name='detail_buy'),
     path('detail/<int:purchase_id>/edit',  detail_edit, name='detail_edit'),

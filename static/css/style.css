@@ -113,6 +113,11 @@ form.add-form {
     gap: 12px
 }
 
+form.reg-form div{
+    width: 100%;
+    padding: 10px 0;
+}
+
 form.edit-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -133,6 +138,7 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
+input[type="password"],
 select,
 textarea {
     border: 1px solid #e6e9ef;
@@ -257,4 +263,9 @@ footer.site-footer {
     .search {
         display: none
     }
+}
+
+
+.right {
+    float: right;
 }

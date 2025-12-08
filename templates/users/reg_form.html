@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+        <main class="main" role="main" >
+            <section class="panel" aria-labelledby="addPurchase">
+                <h2 id="addPurchase">Регистрация</h2>
+                <form class="reg-form" action="#" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class="form-actions">
+                        <button type="submit">Войти</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+{% endblock %}
