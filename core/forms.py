@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import Purchases
 
 class AddPurch(forms.ModelForm):
     class Meta:
@@ -42,12 +42,37 @@ class AddPurch(forms.ModelForm):
         required=False
     )
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if 'class' not in field.widget.attrs:
+                field.widget.attrs['class'] = 'form-control'
+    
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        if title:
+            return title.strip()
+        return title
+    
+    def clean_cost(self):
+        cost = self.cleaned_data.get('cost')
+        if cost is not None and cost < 0:
+            raise forms.ValidationError("Стоимость не может быть отрицательной")
+        return cost
+    
     
 class AddNote(forms.Form):
     note = forms.CharField(
         widget=forms.Textarea(attrs={
             'placeholder': 'Введите заметку здесь...',
-            'rows': 5
+            'rows': 5,
+            'class': 'form-control'
         }),
-        label='заметка:'
+        label='Заметка:'
     )
+    
+    def clean_note(self):
+        note = self.cleaned_data.get('note')
+        if note:
+            return note.strip()
+        return note

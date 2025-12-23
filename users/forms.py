@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
 
 class LoginForm(forms.Form):
     login = forms.CharField(
@@ -66,3 +67,9 @@ class RegForm(forms.Form):
         if password_1 and password_2 and password_1 != password_2:
             raise forms.ValidationError('Пароли не совпадают')
         return self.cleaned_data
+    
+    def clean_password_1(self):
+        password = self.cleaned_data.get('password_1')
+        if len(password) < 8:
+            raise ValidationError('Пароль должен содержать минимум 8 символов')
+        return password

@@ -1,6 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Purchases(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Пользователь',
+        related_name='purchases'
+    )
     title = models.CharField(
         max_length=200, 
         verbose_name='Название товара'
@@ -22,6 +29,7 @@ class Purchases(models.Model):
     class Meta:
         verbose_name = 'Покупки'
         verbose_name_plural = 'Покупка'
+        ordering = ['-buy_date']
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.user.username}"
