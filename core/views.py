@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -33,7 +33,7 @@ def main(request):
                 purchases.user = request.user
                 purchases.save()
                 messages.success(request, 'Покупка успешно добавлена!')
-                return redirect('my/')
+                return redirect('/')
     else:
         form = AddPurch()
 
@@ -80,3 +80,7 @@ def detail_edit(request, purchase_id):
         
     except Purchases.DoesNotExist:
         return redirect('/')
+    
+def get_data(request):
+
+    return JsonResponse({'text': 'Спасибо, сервер услышал ваш голос'})

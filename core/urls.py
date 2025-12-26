@@ -5,7 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('', main, name='main'),
-    # path('word/', word),
+    path('get_data', get_data),
     path('detail/<int:purchase_id>',  detail_buy, name='detail_buy'),
     path('detail/<int:purchase_id>/edit',  detail_edit, name='detail_edit'),
     path('detail/<int:purchase_id>/delete',  detail_delete, name='detail_delete'),
